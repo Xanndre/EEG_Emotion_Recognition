@@ -53,13 +53,12 @@ def main():
 
                 break
 
-    arousal_values = list(map(helpers.emotion_to_arousal, labels))
-    valence_values = list(map(helpers.emotion_to_valence, labels))
-
     concatenated_df = pd.concat([feature_df, pair_feature_df], axis=1)
+
     concatenated_df['Emotion'] = labels
-    concatenated_df['Arousal'] = arousal_values
-    concatenated_df['Valence'] = valence_values
+    concatenated_df['Arousal'] = list(map(helpers.emotion_to_arousal, labels))
+    concatenated_df['Valence'] = list(map(helpers.emotion_to_valence, labels))
+
     concatenated_df.to_csv('features.csv', index=False)
 
 
