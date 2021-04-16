@@ -1,4 +1,5 @@
 import pandas as pd
+import constants
 import matplotlib.pyplot as plt
 
 
@@ -16,7 +17,7 @@ def create_empty_pair_feature_df(pairs, bands):
     for pair in pairs:
         for band in bands:
             if band != 'Slow Alpha':
-                col_name = pair[0] + '_' + pair[1] + '_' + band
+                col_name = 'Pair_' + pair[0] + '_' + pair[1] + '_' + band
                 col_names.append(col_name)
     return pd.DataFrame(columns=col_names)
 
@@ -55,3 +56,14 @@ def draw_plot(history):
     axes[1, 1].set_title('val_accuracy')
 
     plt.show()
+
+
+def get_channel_out_names(features_type):
+    if features_type == 'channels_4':
+        return list(set(constants.CHANNELS) - set(constants.CHANNELS_4))
+    elif features_type == 'channels_6':
+        return list(set(constants.CHANNELS) - set(constants.CHANNELS_6))
+    elif features_type == 'channels_11':
+        return list(set(constants.CHANNELS) - set(constants.CHANNELS_11))
+    elif features_type == 'channels_28':
+        return list(set(constants.CHANNELS) - set(constants.CHANNELS_28))
