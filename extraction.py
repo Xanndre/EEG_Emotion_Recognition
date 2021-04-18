@@ -10,7 +10,8 @@ def calculate_band_power(sig, low, high, sf, window):
     band_power = simps(psd[idx_band], dx=freq_res)
     total_power = simps(psd, dx=freq_res)
     band_rel_power = band_power / total_power
-    return float("{:.3f}".format(band_rel_power))
+    # return float("{:.3f}".format(band_rel_power))
+    return band_rel_power
 
 
 def get_band_power_values(channels, bands, sf, window):
