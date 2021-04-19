@@ -6,13 +6,14 @@ import helpers
 import selection
 import tensorflow as tf
 
-NUM_OF_LABELS = 3
+# NUM_OF_LABELS = 3
+NUM_OF_LABELS = 4
 NUM_OF_EPOCHS = 50
 BATCH_SIZE = 32
 # possible: band, anova, channels_4, channels_6, channels_11, channels_28, all
-FEATURES_TYPE = 'anova'
+FEATURES_TYPE = 'all'
 BAND_NAME = 'Beta'
-LABEL_TYPE = 'Valence'
+LABEL_TYPE = 'Label'
 IS_PAIR = False
 ANOVA_FEATURES = 20
 CHANNELS_OUT = helpers.get_channel_out_names(FEATURES_TYPE)
@@ -44,7 +45,8 @@ def evaluate_model(model, x_train, y_train, x_test, y_test):
 
 
 def main():
-    data = pd.read_csv("features.csv")
+    # data = pd.read_csv("features.csv")
+    data = pd.read_csv("seed_features.csv")
 
     if FEATURES_TYPE == 'band':
         x = selection.select_band_features(BAND_NAME, data, IS_PAIR)
@@ -53,7 +55,8 @@ def main():
         x = selection.select_channel_features(CHANNELS_OUT, data, IS_PAIR)
 
     else:
-        x = data.iloc[:, 0:216].to_numpy()
+        # x = data.iloc[:, 0:216].to_numpy()
+        x = data.iloc[:, 0:310].to_numpy()
 
     y = data[LABEL_TYPE].to_numpy()
 
