@@ -1,25 +1,6 @@
-import pandas as pd
 import constants
 import matplotlib.pyplot as plt
-
-
-def create_empty_feature_df(channels, bands):
-    col_names = []
-    for channel in channels:
-        for band in bands:
-            col_name = channel + '_' + band
-            col_names.append(col_name)
-    return pd.DataFrame(columns=col_names)
-
-
-def create_empty_pair_feature_df(pairs, bands):
-    col_names = []
-    for pair in pairs:
-        for band in bands:
-            if band != 'Slow Alpha':
-                col_name = 'Pair_' + pair[0] + '_' + pair[1] + '_' + band
-                col_names.append(col_name)
-    return pd.DataFrame(columns=col_names)
+from sklearn.metrics import confusion_matrix
 
 
 def emotion_to_arousal(emotion):
@@ -40,6 +21,35 @@ def emotion_to_valence(emotion):
         return 2
 
 
+def emotion_to_emotion(emotion):
+    if emotion == 11:
+        return 7
+    elif emotion == 12:
+        return 8
+    else:
+        return emotion
+
+
+def get_column_names(channels, bands):
+    col_names = []
+    for channel in channels:
+        for band in bands:
+            col_name = channel + '_' + band
+            col_names.append(col_name)
+    return col_names
+
+
+def get_channels(features_type):
+    if features_type == 'channels_4':
+        return constants.CHANNELS_4
+    elif features_type == 'channels_6':
+        return constants.CHANNELS_6
+    elif features_type == 'channels_11':
+        return constants.CHANNELS_11
+    else:
+        return constants.CHANNELS_28
+
+
 def draw_plot(history):
     _, axes = plt.subplots(nrows=2, ncols=2)
 
@@ -58,12 +68,5 @@ def draw_plot(history):
     plt.show()
 
 
-def get_channel_out_names(features_type):
-    if features_type == 'channels_4':
-        return list(set(constants.CHANNELS) - set(constants.CHANNELS_4))
-    elif features_type == 'channels_6':
-        return list(set(constants.CHANNELS) - set(constants.CHANNELS_6))
-    elif features_type == 'channels_11':
-        return list(set(constants.CHANNELS) - set(constants.CHANNELS_11))
-    elif features_type == 'channels_28':
-        return list(set(constants.CHANNELS) - set(constants.CHANNELS_28))
+def draw_confusion_matrix(y_pred, y_test):
+    print(confusion_matrix(y_test, y_pred.argmax(axis=1)))

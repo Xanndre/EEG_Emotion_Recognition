@@ -1,35 +1,40 @@
-import numpy as np
 from scipy import signal
-from scipy.integrate import simps
+import pandas as pd
+import numpy as np
 
 
-def calculate_band_power(sig, low, high, sf, window):
-    freqs, psd = signal.welch(sig, sf, nperseg=window)
-    idx_band = np.logical_and(freqs >= low, freqs <= high)
-    freq_res = freqs[1] - freqs[0]
-    band_power = simps(psd[idx_band], dx=freq_res)
-    total_power = simps(psd, dx=freq_res)
-    band_rel_power = band_power / total_power
-    # return float("{:.3f}".format(band_rel_power))
-    return band_rel_power
+def split_to_windows(data, n_windows):
+    merged_windows = []
+    for sig in data:
+        windows = np.array_split(sig, n_windows)
+        merged_windows.append(windows)
+    return merged_windows
 
 
-def get_band_power_values(channels, bands, sf, window):
-    band_power_values = []
-    for channel in channels:
-        for band in bands:
-            band_power_values.append(calculate_band_power(
-                channel, bands[band][0], bands[band][1], sf, window))
-    return band_power_values
+def calculate_band_psd(merged_windows, sampling_freq, bands):
+    merged_bands = []
+    for channel in merged_windows:
+        channel_bands = []
+        for window in channel:
+            band_psd_values = []
+            freqs, psd = signal.welch(window, sampling_freq)
+            for band in bands:
+                idx_band = np.logical_and(
+                    freqs >= bands[band][0], freqs <= bands[band][1])
+                avg_psd_band = np.mean(psd[idx_band])
+                band_psd_values.append(avg_psd_band)
+            channel_bands.append(band_psd_values)
+        merged_bands.append(channel_bands)
+
+    return np.array(merged_bands)
 
 
-def get_band_power_differences(pairs, bands, row):
-    differences = []
-    for pair in pairs:
-        for band in bands:
-            if band != 'Slow Alpha':
-                cl_name_1 = pair[0] + '_' + band
-                cl_name_2 = pair[1] + '_' + band
-                diff = abs(row[cl_name_1] - row[cl_name_2])
-                differences.append(float("{:.3f}".format(diff)))
-    return differences
+def extract_features(data, n_windows, sampling_freq, bands, col_names):
+    merged_windows = split_to_windows(data, n_windows)
+
+    merged_bands = calculate_band_psd(merged_windows, sampling_freq, bands)
+
+    reshaped_features = merged_bands.transpose(
+        1, 0, 2).reshape(merged_bands.shape[1], -1)
+
+    return pd.DataFrame(reshaped_features, columns=col_names)

@@ -11,19 +11,8 @@ CHANNELS_11 = ['C4', 'FC1', 'PO3', 'F4',
                'FC5', 'Cz', 'P7', 'O1', 'T8', 'CP2', 'O2']
 
 CHANNELS_6 = ['C4', 'FC1', 'PO3', 'F4', 'FC5', 'Cz']
+
 CHANNELS_4 = ['C4', 'FC1', 'PO3', 'F4']
-
-PAIRS = [['Fp1', 'Fp2'], ['AF3', 'AF4'], ['F7', 'F8'],
-         ['F3', 'F4'], ['FC5', 'FC6'], ['FC1', 'FC2'],
-         ['T7', 'T8'], ['C3', 'C4'], ['O1', 'O2'], ['CP5', 'CP6'],
-         ['CP1', 'CP2'], ['P7', 'P8'], ['P3', 'P4'], ['PO3', 'PO4']]
-
-BANDS = {'Theta': (4, 8),
-         'Slow Alpha': (8, 10),
-         'Alpha': (8, 12),
-         'Beta': (12, 30),
-         'Gamma': (30, 45)}
-
 
 CHANNELS_SEED = ['FP1', 'FPZ', 'FP2', 'AF3', 'AF4', 'F7', 'F5', 'F3',
                  'F1', 'FZ', 'F2', 'F4', 'F6', 'F8', 'FT7', 'FC5', 'FC3',
@@ -33,4 +22,15 @@ CHANNELS_SEED = ['FP1', 'FPZ', 'FP2', 'AF3', 'AF4', 'F7', 'F5', 'F3',
                  'P1', 'PZ', 'P2', 'P4', 'P6', 'P8', 'PO7', 'PO5', 'PO3',
                  'POZ', 'PO4', 'PO6', 'PO8', 'CB1', 'O1', 'OZ', 'O2', 'CB2']
 
-BANDS_SEED = ['Delta', 'Theta', 'Alpha', 'Beta', 'Gamma']
+BANDS = {'Delta': (1, 4),
+         'Theta': (4, 8),
+         'Alpha': (8, 14),
+         'Beta': (14, 31),
+         'Gamma': (31, 50)}
+
+SEED_SESSION1_LABEL = [1, 2, 3, 0, 2, 0, 0, 1, 0, 1,
+                       2, 1, 1, 1, 2, 3, 2, 2, 3, 3, 0, 3, 0, 3]
+SEED_SESSION2_LABEL = [2, 1, 3, 0, 0, 2, 0, 2, 3, 3,
+                       2, 3, 2, 0, 1, 1, 2, 1, 0, 3, 0, 1, 3, 1]
+SEED_SESSION3_LABEL = [1, 2, 2, 1, 3, 3, 3, 1, 1, 2,
+                       1, 0, 2, 3, 3, 0, 2, 3, 0, 0, 2, 0, 1, 0]
