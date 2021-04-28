@@ -10,7 +10,7 @@ import tensorflow as tf
 NUM_OF_LABELS = 3
 NUM_OF_EPOCHS = 100
 BATCH_SIZE = 32
-ANOVA_FEATURES = 20
+SELECTED_FEATURES = 20
 
 # possible: band, anova, channels_4, channels_6, channels_11, channels_28, all
 FEATURES_TYPE = 'all'
@@ -66,7 +66,10 @@ def main():
     y = data[LABEL_TYPE].to_numpy()
 
     if FEATURES_TYPE == 'anova':
-        x = selection.select_anova_features(ANOVA_FEATURES, x, y)
+        x = selection.select_anova_features(SELECTED_FEATURES, x, y)
+
+    elif FEATURES_TYPE == 'chi2':
+        x = selection.select_chi2_features(SELECTED_FEATURES, x, y)
 
     x_train, x_test, y_train, y_test = train_test_split(
         x, y, test_size=0.3, random_state=100, shuffle=True)
