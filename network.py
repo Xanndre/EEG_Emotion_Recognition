@@ -48,7 +48,10 @@ def evaluate_model(model, x_train, y_train, x_test, y_test):
 
     model.evaluate(x_test, y_test, batch_size=BATCH_SIZE, verbose=2)
 
-    helpers.draw_confusion_matrix(model.predict(x_test), y_test)
+    y_pred = model.predict(x_test)
+
+    helpers.print_precision_recall(y_pred, y_test)
+    helpers.draw_confusion_matrix(y_pred, y_test)
     helpers.draw_plot(history)
 
 

@@ -1,6 +1,6 @@
 import constants
 import matplotlib.pyplot as plt
-from sklearn.metrics import confusion_matrix
+from sklearn.metrics import confusion_matrix, precision_score, recall_score
 
 
 def emotion_to_arousal(emotion):
@@ -80,3 +80,10 @@ def draw_plot(history):
 
 def draw_confusion_matrix(y_pred, y_test):
     print(confusion_matrix(y_test, y_pred.argmax(axis=1)))
+
+
+def print_precision_recall(y_pred, y_test):
+    print('Precision: ', '%.4f' % precision_score(
+        y_test, y_pred.argmax(axis=1), average='micro'))
+    print('Recall: ', '%.4f' % recall_score(
+        y_test, y_pred.argmax(axis=1), average='micro'))
