@@ -7,21 +7,22 @@ import selection
 import tensorflow as tf
 
 
-NUM_OF_LABELS = 3
-NUM_OF_EPOCHS = 100
+NUM_OF_LABELS = 4
+NUM_OF_EPOCHS = 500
 BATCH_SIZE = 32
-SELECTED_FEATURES = 20
+SELECTED_FEATURES = 200
 
-# possible: band, anova, channels_4, channels_6, channels_11, channels_28, all
+# possible: all, band, anova, chi2, channels_4, channels_6, channels_11, channels_28, channels_32,
+#           channels_10, channels_9, channels_8, channels7
 FEATURES_TYPE = 'all'
 # possible: seed, mahnob
-DATASET = 'mahnob'
+DATASET = 'seed'
 
 NUM_OF_FEATURES = 310 if DATASET == 'seed' else 160
-FILE_NAME = 'mahnob_features.csv' if DATASET == 'mahnob' else 'seed_features.csv'
+FILE_NAME = 'mahnob_features.csv' if DATASET == 'mahnob' else 'seed_features_de_movingAve.csv'
 
 BAND_NAME = 'Beta'
-LABEL_TYPE = 'Arousal_Mapped'
+LABEL_TYPE = 'Label'
 CHANNELS = helpers.get_channels(FEATURES_TYPE)
 
 
@@ -57,7 +58,8 @@ def main():
     if FEATURES_TYPE == 'band':
         x = selection.select_band_features(BAND_NAME, data)
 
-    elif FEATURES_TYPE in ['channels_4', 'channels_6', 'channels_11', 'channels_28']:
+    elif FEATURES_TYPE in ['channels_4', 'channels_6', 'channels_7', 'channels_8',
+                           'channels_9', 'channels_10', 'channels_11', 'channels_28', 'channels_32']:
         x = selection.select_channel_features(CHANNELS, data)
 
     else:

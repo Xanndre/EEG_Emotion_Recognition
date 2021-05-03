@@ -7,8 +7,8 @@ import numpy as np
 import pandas as pd
 
 N_FEATURES = len(BANDS) * len(CHANNELS_SEED)
-FEATURES_TYPE = 'psd_LDS'
-FILE_NAME = 'seed_features.csv'
+FEATURES_TYPE = 'de_movingAve'
+FILE_NAME = 'seed_features_de_movingAve.csv'
 
 
 def assign_labels(dir):

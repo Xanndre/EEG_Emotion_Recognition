@@ -5,14 +5,15 @@ def select_anova_features(k, x, y):
     return SelectKBest(f_classif, k=k).fit_transform(x, y)
 
 
-def select_band_features(band, data):
-    band_features = list(filter(lambda x: x.endswith(band), data.columns))
+def select_band_features(bands, data):
+    band_features = list(
+        filter(lambda x: x.endswith(tuple(bands)), data.columns))
     return data[band_features].to_numpy()
 
 
 def select_channel_features(channels, data):
     channel_features = list(
-        filter(lambda x: x.startswith(channels), data.columns))
+        filter(lambda x: x.startswith(tuple(channels)), data.columns))
     return data[channel_features].to_numpy()
 
 

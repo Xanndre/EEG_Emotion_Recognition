@@ -44,10 +44,20 @@ def get_channels(features_type):
         return constants.CHANNELS_4
     elif features_type == 'channels_6':
         return constants.CHANNELS_6
+    elif features_type == 'channels_7':
+        return constants.CHANNELS_7
+    elif features_type == 'channels_8':
+        return constants.CHANNELS_8
+    elif features_type == 'channels_9':
+        return constants.CHANNELS_9
+    elif features_type == 'channels_10':
+        return constants.CHANNELS_10
     elif features_type == 'channels_11':
         return constants.CHANNELS_11
-    else:
+    elif features_type == 'channels_28':
         return constants.CHANNELS_28
+    else:
+        return constants.CHANNELS_32
 
 
 def draw_plot(history):

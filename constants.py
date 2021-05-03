@@ -1,7 +1,7 @@
-CHANNELS = ['Fp1', 'AF3', 'F3', 'F7', 'FC5', 'FC1', 'C3', 'T7',
-            'CP5', 'CP1', 'P3', 'P7', 'PO3', 'O1', 'Oz', 'Pz',
-            'Fp2', 'AF4', 'Fz', 'F4', 'F8', 'FC6', 'FC2', 'Cz',
-            'C4', 'T8', 'CP6', 'CP2', 'P4', 'P8', 'PO4', 'O2']
+CHANNELS_32 = ['Fp1', 'AF3', 'F3', 'F7', 'FC5', 'FC1', 'C3', 'T7',
+               'CP5', 'CP1', 'P3', 'P7', 'PO3', 'O1', 'Oz', 'Pz',
+               'Fp2', 'AF4', 'Fz', 'F4', 'F8', 'FC6', 'FC2', 'Cz',
+               'C4', 'T8', 'CP6', 'CP2', 'P4', 'P8', 'PO4', 'O2']
 
 CHANNELS_28 = ['F3', 'F7', 'FC5', 'FC1', 'C3', 'T7', 'CP5', 'P3', 'P7', 'PO3', 'O1',
                'Oz', 'Pz', 'Fp2', 'AF4', 'Fz', 'F4', 'FC6', 'FC2', 'Cz', 'C4', 'T8',
@@ -9,6 +9,14 @@ CHANNELS_28 = ['F3', 'F7', 'FC5', 'FC1', 'C3', 'T7', 'CP5', 'P3', 'P7', 'PO3', '
 
 CHANNELS_11 = ['C4', 'FC1', 'PO3', 'F4',
                'FC5', 'Cz', 'P7', 'O1', 'T8', 'CP2', 'O2']
+
+CHANNELS_10 = ['C4', 'FC1', 'PO3', 'F4', 'FC5', 'Cz', 'P7', 'O1', 'T8', 'CP2']
+
+CHANNELS_9 = ['C4', 'FC1', 'PO3', 'F4', 'FC5', 'Cz', 'O1', 'T8', 'CP2']
+
+CHANNELS_8 = ['C4', 'FC1', 'PO3', 'F4', 'FC5', 'Cz', 'O1', 'T8']
+
+CHANNELS_7 = ['C4', 'FC1', 'PO3', 'F4', 'FC5', 'Cz', 'T8']
 
 CHANNELS_6 = ['C4', 'FC1', 'PO3', 'F4', 'FC5', 'Cz']
 
