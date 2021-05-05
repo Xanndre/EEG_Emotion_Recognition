@@ -70,10 +70,10 @@ def draw_plot(history):
     axes[0, 1].set_title('train loss')
 
     axes[1, 0].plot(history.history['val_loss'])
-    axes[1, 0].set_title('test loss')
+    axes[1, 0].set_title('validation loss')
 
     axes[1, 1].plot(history.history['val_accuracy'])
-    axes[1, 1].set_title('test accuracy')
+    axes[1, 1].set_title('validation accuracy')
 
     plt.show()
 
