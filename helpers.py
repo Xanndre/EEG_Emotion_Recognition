@@ -64,16 +64,16 @@ def draw_plot(history):
     _, axes = plt.subplots(nrows=2, ncols=2)
 
     axes[0, 0].plot(history.history['accuracy'])
-    axes[0, 0].set_title('accuracy')
+    axes[0, 0].set_title('train accuracy')
 
     axes[0, 1].plot(history.history['loss'])
-    axes[0, 1].set_title('loss')
+    axes[0, 1].set_title('train loss')
 
     axes[1, 0].plot(history.history['val_loss'])
-    axes[1, 0].set_title('val_loss')
+    axes[1, 0].set_title('test loss')
 
     axes[1, 1].plot(history.history['val_accuracy'])
-    axes[1, 1].set_title('val_accuracy')
+    axes[1, 1].set_title('test accuracy')
 
     plt.show()
 
