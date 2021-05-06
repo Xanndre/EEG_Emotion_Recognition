@@ -56,25 +56,32 @@ def get_channels(features_type):
         return constants.CHANNELS_11
     elif features_type == 'channels_28':
         return constants.CHANNELS_28
+    elif features_type == 'channels_42':
+        return constants.CHANNELS_42
+    elif features_type == 'channels_37':
+        return constants.CHANNELS_37
+    elif features_type == 'channels_50':
+        return constants.CHANNELS_50
     else:
         return constants.CHANNELS_32
 
 
 def draw_plot(history):
-    _, axes = plt.subplots(nrows=2, ncols=2)
+    fig, axes = plt.subplots(nrows=2, ncols=1)
 
-    axes[0, 0].plot(history.history['accuracy'])
-    axes[0, 0].set_title('train accuracy')
+    axes[0].plot(history.history['accuracy'])
+    axes[0].set_title('train accuracy')
 
-    axes[0, 1].plot(history.history['loss'])
-    axes[0, 1].set_title('train loss')
+    axes[1].plot(history.history['loss'])
+    axes[1].set_title('train loss')
 
-    axes[1, 0].plot(history.history['val_loss'])
-    axes[1, 0].set_title('validation loss')
+    # axes[1, 0].plot(history.history['val_loss'])
+    # axes[1, 0].set_title('validation loss')
 
-    axes[1, 1].plot(history.history['val_accuracy'])
-    axes[1, 1].set_title('validation accuracy')
+    # axes[1, 1].plot(history.history['val_accuracy'])
+    # axes[1, 1].set_title('validation accuracy')
 
+    fig.subplots_adjust(wspace=0.25, hspace=0.4)
     plt.show()
 
 

@@ -5,7 +5,7 @@ from sklearn.model_selection import train_test_split
 import helpers
 import selection
 import tensorflow as tf
-
+import numpy as np
 
 NUM_OF_LABELS = 4
 NUM_OF_EPOCHS = 500
@@ -13,8 +13,8 @@ BATCH_SIZE = 32
 SELECTED_FEATURES = 200
 
 # possible: all, band, anova, chi2, channels_4, channels_6, channels_11, channels_28, channels_32,
-#           channels_10, channels_9, channels_8, channels7
-FEATURES_TYPE = 'all'
+#           channels_10, channels_9, channels_8, channels_7, channels_37, channels_42, channels_50
+FEATURES_TYPE = 'chi2'
 # possible: seed, mahnob
 DATASET = 'seed'
 
@@ -42,8 +42,8 @@ def create_model(n_features):
 
 
 def evaluate_model(model, x_train, y_train, x_test, y_test):
+
     history = model.fit(x_train, y_train, epochs=NUM_OF_EPOCHS,
-                        validation_split=0.2,
                         batch_size=BATCH_SIZE, verbose=2)
 
     model.evaluate(x_test, y_test, batch_size=BATCH_SIZE, verbose=2)
@@ -56,13 +56,17 @@ def evaluate_model(model, x_train, y_train, x_test, y_test):
 
 
 def main():
+    np.random.seed(289)
+    tf.random.set_seed(289)
+
     data = pd.read_csv(FILE_NAME)
 
     if FEATURES_TYPE == 'band':
         x = selection.select_band_features(BAND_NAME, data)
 
     elif FEATURES_TYPE in ['channels_4', 'channels_6', 'channels_7', 'channels_8',
-                           'channels_9', 'channels_10', 'channels_11', 'channels_28', 'channels_32']:
+                           'channels_9', 'channels_10', 'channels_11', 'channels_28',
+                           'channels_32', 'channels_42', 'channels_37', 'channels_50']:
         x = selection.select_channel_features(CHANNELS, data)
 
     else:
