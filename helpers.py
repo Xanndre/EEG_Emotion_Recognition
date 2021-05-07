@@ -3,33 +3,6 @@ import matplotlib.pyplot as plt
 from sklearn.metrics import confusion_matrix, precision_score, recall_score
 
 
-def emotion_to_arousal(emotion):
-    if emotion in [0, 2, 5]:
-        return 0
-    elif emotion in [4, 11]:
-        return 1
-    else:
-        return 2
-
-
-def emotion_to_valence(emotion):
-    if emotion in [1, 2, 3, 5, 12]:
-        return 0
-    elif emotion in [0, 6]:
-        return 1
-    else:
-        return 2
-
-
-def emotion_to_emotion(emotion):
-    if emotion == 11:
-        return 7
-    elif emotion == 12:
-        return 8
-    else:
-        return emotion
-
-
 def get_column_names(channels, bands):
     col_names = []
     for channel in channels:
@@ -74,12 +47,6 @@ def draw_plot(history):
 
     axes[1].plot(history.history['loss'])
     axes[1].set_title('train loss')
-
-    # axes[1, 0].plot(history.history['val_loss'])
-    # axes[1, 0].set_title('validation loss')
-
-    # axes[1, 1].plot(history.history['val_accuracy'])
-    # axes[1, 1].set_title('validation accuracy')
 
     fig.subplots_adjust(wspace=0.25, hspace=0.4)
     plt.show()

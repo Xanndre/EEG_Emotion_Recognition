@@ -10,16 +10,15 @@ import numpy as np
 NUM_OF_LABELS = 4
 NUM_OF_EPOCHS = 500
 BATCH_SIZE = 32
-SELECTED_FEATURES = 200
+SELECTED_FEATURES = 25
+RANDOM_SEED = 289
+
+NUM_OF_FEATURES = 310
+FILE_NAME = 'seed_features_de_movingAve.csv'
 
 # possible: all, band, anova, chi2, channels_4, channels_6, channels_11, channels_28, channels_32,
 #           channels_10, channels_9, channels_8, channels_7, channels_37, channels_42, channels_50
 FEATURES_TYPE = 'chi2'
-# possible: seed, mahnob
-DATASET = 'seed'
-
-NUM_OF_FEATURES = 310 if DATASET == 'seed' else 160
-FILE_NAME = 'mahnob_features.csv' if DATASET == 'mahnob' else 'seed_features_de_movingAve.csv'
 
 BAND_NAME = 'Beta'
 LABEL_TYPE = 'Label'
@@ -56,8 +55,8 @@ def evaluate_model(model, x_train, y_train, x_test, y_test):
 
 
 def main():
-    np.random.seed(289)
-    tf.random.set_seed(289)
+    np.random.seed(RANDOM_SEED)
+    tf.random.set_seed(RANDOM_SEED)
 
     data = pd.read_csv(FILE_NAME)
 
