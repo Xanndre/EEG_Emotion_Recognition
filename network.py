@@ -52,6 +52,7 @@ def evaluate_model(model, x_train, y_train, x_test, y_test):
     helpers.print_precision_recall(y_pred, y_test)
     helpers.draw_confusion_matrix(y_pred, y_test)
     helpers.draw_plot(history)
+    helpers.draw_roc_curve(y_pred, y_test, NUM_OF_LABELS)
 
 
 def main():

@@ -1,6 +1,8 @@
 import constants
 import matplotlib.pyplot as plt
-from sklearn.metrics import confusion_matrix, precision_score, recall_score
+from itertools import cycle
+from sklearn.preprocessing import label_binarize
+from sklearn.metrics import confusion_matrix, precision_score, recall_score, roc_curve, auc
 
 
 def get_column_names(channels, bands):
@@ -61,3 +63,39 @@ def print_precision_recall(y_pred, y_test):
         y_test, y_pred.argmax(axis=1), average='micro'))
     print('Recall: ', '%.4f' % recall_score(
         y_test, y_pred.argmax(axis=1), average='micro'))
+
+
+def draw_roc_curve(y_pred, y_test, n_classes):
+    y_pred = label_binarize(y_pred.argmax(axis=1), classes=range(n_classes))
+    y_test = label_binarize(y_test, classes=range(n_classes))
+
+    fpr = dict()
+    tpr = dict()
+    roc_auc = dict()
+
+    for i in range(n_classes):
+        fpr[i], tpr[i], _ = roc_curve(y_test[:, i], y_pred[:, i])
+        roc_auc[i] = auc(fpr[i], tpr[i])
+
+    fpr['avg'], tpr['avg'], _ = roc_curve(y_test.ravel(), y_pred.ravel())
+    roc_auc['avg'] = auc(fpr['avg'], tpr['avg'])
+
+    plt.figure()
+    plt.plot(fpr['avg'], tpr['avg'],
+             label='average ROC curve (area = {0:0.2f})'
+             ''.format(roc_auc['avg']),
+             color='darkorange', linestyle=':', linewidth=4)
+
+    colors = cycle(['orchid', 'mediumslateblue', 'deepskyblue', 'greenyellow'])
+    for i, color in zip(range(n_classes), colors):
+        plt.plot(fpr[i], tpr[i], color=color, lw=2,
+                 label='ROC curve of class {0} (area = {1:0.2f})'
+                 ''.format(i, roc_auc[i]))
+
+    plt.plot([0, 1], [0, 1], 'k--', lw=2)
+    plt.xlim([0.0, 1.0])
+    plt.ylim([0.0, 1.05])
+    plt.xlabel('False Positive Rate')
+    plt.ylabel('True Positive Rate')
+    plt.legend(loc='lower right')
+    plt.show()
