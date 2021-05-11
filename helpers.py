@@ -92,6 +92,17 @@ def draw_roc_curve(y_pred, y_test, n_classes):
                  label='ROC curve of class {0} (area = {1:0.2f})'
                  ''.format(i, roc_auc[i]))
 
+    plot_roc_curve()
+
+    plt.figure()
+    plt.plot(fpr['avg'], tpr['avg'],
+             label='ROC curve (area = {0:0.2f})'
+             ''.format(roc_auc['avg']), color='deepskyblue')
+
+    plot_roc_curve()
+
+
+def plot_roc_curve():
     plt.plot([0, 1], [0, 1], 'k--', lw=2)
     plt.xlim([0.0, 1.0])
     plt.ylim([0.0, 1.05])
