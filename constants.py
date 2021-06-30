@@ -27,13 +27,7 @@ CHANNELS_28 = ['C4', 'FC1', 'PO3', 'F4', 'FC5', 'CZ', 'P7', 'O1', 'T8',
 CHANNELS_11 = ['C4', 'FC1', 'PO3', 'F4',
                'FC5', 'CZ', 'P7', 'O1', 'T8', 'CP2', 'O2']
 
-CHANNELS_10 = ['C4', 'FC1', 'PO3', 'F4', 'FC5', 'CZ', 'P7', 'O1', 'T8', 'CP2']
-
-CHANNELS_9 = ['C4', 'FC1', 'PO3', 'F4', 'FC5', 'CZ', 'O1', 'T8', 'CP2']
-
 CHANNELS_8 = ['C4', 'FC1', 'PO3', 'F4', 'FC5', 'CZ', 'O1', 'T8']
-
-CHANNELS_7 = ['C4', 'FC1', 'PO3', 'F4', 'FC5', 'CZ', 'T8']
 
 CHANNELS_6 = ['C4', 'FC1', 'PO3', 'F4', 'FC5', 'CZ']
 

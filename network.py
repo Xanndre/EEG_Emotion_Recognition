@@ -17,10 +17,10 @@ NUM_OF_FEATURES = 310
 FILE_NAME = 'seed_features_de_movingAve.csv'
 
 # possible: all, band, anova, chi2, channels_4, channels_6, channels_11, channels_28, channels_32,
-#           channels_10, channels_9, channels_8, channels_7, channels_37, channels_42, channels_50
-FEATURES_TYPE = 'chi2'
+#           channels_8, channels_37, channels_42, channels_50
+FEATURES_TYPE = 'band'
 
-BAND_NAME = 'Beta'
+BAND_NAME = ['Gamma']
 LABEL_TYPE = 'Label'
 CHANNELS = helpers.get_channels(FEATURES_TYPE)
 
@@ -64,9 +64,9 @@ def main():
     if FEATURES_TYPE == 'band':
         x = selection.select_band_features(BAND_NAME, data)
 
-    elif FEATURES_TYPE in ['channels_4', 'channels_6', 'channels_7', 'channels_8',
-                           'channels_9', 'channels_10', 'channels_11', 'channels_28',
-                           'channels_32', 'channels_42', 'channels_37', 'channels_50']:
+    elif FEATURES_TYPE in ['channels_4', 'channels_6', 'channels_8',
+                           'channels_11', 'channels_28', 'channels_32',
+                           'channels_42', 'channels_37', 'channels_50']:
         x = selection.select_channel_features(CHANNELS, data)
 
     else:

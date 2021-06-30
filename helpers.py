@@ -1,5 +1,8 @@
 import constants
 import matplotlib.pyplot as plt
+import seaborn as sn
+import pandas as pd
+import matplotlib
 from itertools import cycle
 from sklearn.preprocessing import label_binarize
 from sklearn.metrics import confusion_matrix, precision_score, recall_score, roc_curve, auc
@@ -19,14 +22,8 @@ def get_channels(features_type):
         return constants.CHANNELS_4
     elif features_type == 'channels_6':
         return constants.CHANNELS_6
-    elif features_type == 'channels_7':
-        return constants.CHANNELS_7
     elif features_type == 'channels_8':
         return constants.CHANNELS_8
-    elif features_type == 'channels_9':
-        return constants.CHANNELS_9
-    elif features_type == 'channels_10':
-        return constants.CHANNELS_10
     elif features_type == 'channels_11':
         return constants.CHANNELS_11
     elif features_type == 'channels_28':
@@ -55,7 +52,15 @@ def draw_plot(history):
 
 
 def draw_confusion_matrix(y_pred, y_test):
-    print(confusion_matrix(y_test, y_pred.argmax(axis=1)))
+    matrix = confusion_matrix(y_test, y_pred.argmax(axis=1))
+    df_matrix = pd.DataFrame(matrix, index=[i for i in ["Neutral", "Sad", "Fear", "Happy"]],
+                             columns=[i for i in ["Neutral", "Sad", "Fear", "Happy"]])
+
+    plt.figure(figsize=(6.4, 4.8))
+    sn.heatmap(df_matrix, annot=True, cmap=matplotlib.cm.Blues, fmt='g')
+    plt.xlabel("Predicted label")
+    plt.ylabel("True label")
+    plt.show()
 
 
 def print_precision_recall(y_pred, y_test):
